@@ -2,7 +2,7 @@ package de.epost.kata.song;
 
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class SongTest {
 

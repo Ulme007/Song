@@ -1,23 +1,17 @@
 package de.epost.kata.song;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class FarmTheme extends Theme {
 
-    List<String> animals = new ArrayList<String>();
-
     public FarmTheme() {
-        animals.add("fly");
-        animals.add("spider");
-        animals.add("bird");
-        animals.add("cat");
-        animals.add("dog");
-        animals.add("cow");
-        animals.add("horse");
-    }
-
-    public List<String> getAnimals() {
-        return animals;
+        List<Animal> animals = getAnimals();
+        animals.add(new Animal("fly", ""));
+        animals.add(new Animal("spider", "That wriggled and wiggled and tickled inside her."));
+        animals.add(new Animal("bird", "How absurd to swallow a"));
+        animals.add(new Animal("cat", "Fancy that to swallow a"));
+        animals.add(new Animal("dog", "What a hog, to swallow a"));
+        animals.add(new Animal("cow", "I don't know how she swallowed a"));
+        animals.add(new Animal("horse", ""));
     }
 }

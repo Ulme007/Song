@@ -1,5 +1,6 @@
 package de.epost.kata.song;
 
+import de.epost.kata.song.Theme.Animal;
 import org.apache.commons.lang3.text.StrSubstitutor;
 
 import java.util.HashMap;
@@ -8,13 +9,13 @@ import java.util.Map;
 
 class Song {
 
-    private static final String lastStropheTemplate =
-            "There was an old lady who swallowed a ${animal}...\n" +
-                    "...She's dead, of course!";
-
     private static final String firstStropheTemplate =
             "There was an old lady who swallowed a ${animal}.\n" +
                     "I don't know why she swallowed a ${animal} - perhaps she'll die!\n";
+
+    private static final String lastStropheTemplate =
+            "There was an old lady who swallowed a ${animal}...\n" +
+                    "...She's dead, of course!";
 
 
 //    private String songTemplate =
@@ -69,22 +70,22 @@ class Song {
         return playSong(theme.getAnimals());
     }
 
-    private String playSong(List<String> animals) {
+    private String playSong(List<Animal> animals) {
         String song = addFirstStrophe(animals.get(0));
         song += addMiddleStrophes(animals);
         song += addLastStrophe(animals.get(animals.size() - 1));
         return song;
     }
 
-    private String addFirstStrophe(String animal) {
+    private String addFirstStrophe(Animal animal) {
         Map<String, String> values = new HashMap<>();
-        values.put("animal", animal);
+        values.put("animal", animal.getName());
 
         StrSubstitutor sub = new StrSubstitutor(values);
         return sub.replace(firstStropheTemplate);
     }
 
-    private String addMiddleStrophes(List<String> animals) {
+    private String addMiddleStrophes(List<Animal> animals) {
         String middleSong = addSecondStrophe(animals);
         middleSong += addThirdStrophe(animals);
         middleSong += addFourthStrophe(animals);
@@ -95,7 +96,7 @@ class Song {
         return middleSong;
     }
 
-    private String addSecondStrophe(List<String> animals) {
+    private String addSecondStrophe(List<Animal> animals) {
         String strophe = "\n" +
                 "There was an old lady who swallowed a ${animal1};\n" +
                 "That wriggled and wiggled and tickled inside her.\n" +
@@ -103,14 +104,14 @@ class Song {
                 "I don't know why she swallowed a ${animal0} - perhaps she'll die!\n";
 
         Map<String, String> values = new HashMap<>();
-        values.put("animal0", animals.get(0));
-        values.put("animal1", animals.get(1));
+        values.put("animal0", animals.get(0).getName());
+        values.put("animal1", animals.get(1).getName());
 
         StrSubstitutor sub = new StrSubstitutor(values);
         return sub.replace(strophe);
     }
 
-    private String addThirdStrophe(List<String> animals) {
+    private String addThirdStrophe(List<Animal> animals) {
         String strophe = "\n" +
                 "There was an old lady who swallowed a ${animal2};\n" +
                 "How absurd to swallow a ${animal2}.\n" +
@@ -119,15 +120,15 @@ class Song {
                 "I don't know why she swallowed a ${animal0} - perhaps she'll die!\n";
 
         Map<String, String> values = new HashMap<>();
-        values.put("animal0", animals.get(0));
-        values.put("animal1", animals.get(1));
-        values.put("animal2", animals.get(2));
+        values.put("animal0", animals.get(0).getName());
+        values.put("animal1", animals.get(1).getName());
+        values.put("animal2", animals.get(2).getName());
 
         StrSubstitutor sub = new StrSubstitutor(values);
         return sub.replace(strophe);
     }
 
-    private String addFourthStrophe(List<String> animals) {
+    private String addFourthStrophe(List<Animal> animals) {
         String strophe = "\n" +
                 "There was an old lady who swallowed a ${animal3};\n" +
                 "Fancy that to swallow a ${animal3}!\n" +
@@ -137,16 +138,16 @@ class Song {
                 "I don't know why she swallowed a ${animal0} - perhaps she'll die!\n";
 
         Map<String, String> values = new HashMap<>();
-        values.put("animal0", animals.get(0));
-        values.put("animal1", animals.get(1));
-        values.put("animal2", animals.get(2));
-        values.put("animal3", animals.get(3));
+        values.put("animal0", animals.get(0).getName());
+        values.put("animal1", animals.get(1).getName());
+        values.put("animal2", animals.get(2).getName());
+        values.put("animal3", animals.get(3).getName());
 
         StrSubstitutor sub = new StrSubstitutor(values);
         return sub.replace(strophe);
     }
 
-    private String addFifthStrophe(List<String> animals) {
+    private String addFifthStrophe(List<Animal> animals) {
         String strophe = "\n" +
                 "There was an old lady who swallowed a ${animal4};\n" +
                 "What a hog, to swallow a ${animal4}!\n" +
@@ -157,17 +158,17 @@ class Song {
                 "I don't know why she swallowed a ${animal0} - perhaps she'll die!\n";
 
         Map<String, String> values = new HashMap<>();
-        values.put("animal0", animals.get(0));
-        values.put("animal1", animals.get(1));
-        values.put("animal2", animals.get(2));
-        values.put("animal3", animals.get(3));
-        values.put("animal4", animals.get(4));
+        values.put("animal0", animals.get(0).getName());
+        values.put("animal1", animals.get(1).getName());
+        values.put("animal2", animals.get(2).getName());
+        values.put("animal3", animals.get(3).getName());
+        values.put("animal4", animals.get(4).getName());
 
         StrSubstitutor sub = new StrSubstitutor(values);
         return sub.replace(strophe);
     }
 
-    private String addSixthStrophe(List<String> animals) {
+    private String addSixthStrophe(List<Animal> animals) {
         String strophe = "\n" +
                 "There was an old lady who swallowed a ${animal5};\n" +
                 "I don't know how she swallowed a ${animal5}!\n" +
@@ -179,20 +180,20 @@ class Song {
                 "I don't know why she swallowed a ${animal0} - perhaps she'll die!\n";
 
         Map<String, String> values = new HashMap<>();
-        values.put("animal0", animals.get(0));
-        values.put("animal1", animals.get(1));
-        values.put("animal2", animals.get(2));
-        values.put("animal3", animals.get(3));
-        values.put("animal4", animals.get(4));
-        values.put("animal5", animals.get(5));
+        values.put("animal0", animals.get(0).getName());
+        values.put("animal1", animals.get(1).getName());
+        values.put("animal2", animals.get(2).getName());
+        values.put("animal3", animals.get(3).getName());
+        values.put("animal4", animals.get(4).getName());
+        values.put("animal5", animals.get(5).getName());
 
         StrSubstitutor sub = new StrSubstitutor(values);
         return sub.replace(strophe);
     }
 
-    private String addLastStrophe(String animal) {
+    private String addLastStrophe(Animal animal) {
         Map<String, String> values = new HashMap<>();
-        values.put("animal", animal);
+        values.put("animal", animal.getName());
 
         StrSubstitutor sub = new StrSubstitutor(values);
         return sub.replace(lastStropheTemplate);

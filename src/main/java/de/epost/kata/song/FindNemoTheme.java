@@ -1,22 +1,17 @@
 package de.epost.kata.song;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class FindNemoTheme extends Theme {
-    List<String> animals = new ArrayList<String>();
 
     public FindNemoTheme() {
-        animals.add("Nemo");
-        animals.add("Dorie");
-        animals.add("Marlin");
-        animals.add("Cora");
-        animals.add("Rochen");
-        animals.add("Bruce");
-        animals.add("Khan");
-    }
-
-    public List<String> getAnimals() {
-        return animals;
+        List<Animal> animals = getAnimals();
+        animals.add(new Animal("Nemo", ""));
+        animals.add(new Animal("Dorie", "That wriggled and wiggled and tickled inside her."));
+        animals.add(new Animal("Marlin", "How absurd to swallow a"));
+        animals.add(new Animal("Cora", "Fancy that to swallow a"));
+        animals.add(new Animal("Rochen", "What a hog, to swallow a"));
+        animals.add(new Animal("Bruce", "I don't know how she swallowed a"));
+        animals.add(new Animal("Khan", ""));
     }
 }

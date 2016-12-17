@@ -1,22 +1,30 @@
 package de.epost.kata.song;
 
-import org.junit.Assert;
+import de.epost.kata.song.Theme.Animal;
 import org.junit.Test;
 
+import java.util.List;
+
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 public class ThemeTest {
 
     @Test
     public void default_theme_contains_farm_animals() {
         Theme defaultTheme = new FarmTheme();
-        assertEquals("fly", defaultTheme.getAnimals().get(0));
-        assertEquals("spider", defaultTheme.getAnimals().get(1));
-        assertEquals("bird", defaultTheme.getAnimals().get(2));
-        assertEquals("cat", defaultTheme.getAnimals().get(3));
-        assertEquals("dog", defaultTheme.getAnimals().get(4));
-        assertEquals("cow", defaultTheme.getAnimals().get(5));
-        assertEquals("horse", defaultTheme.getAnimals().get(6));
+        List<Animal> animals = defaultTheme.getAnimals();
+
+        assertAnimal(animals.get(0), "fly", "");
+        assertAnimal(animals.get(1), "spider", "That wriggled and wiggled and tickled inside her.");
+        assertAnimal(animals.get(2), "bird", "How absurd to swallow a");
+        assertAnimal(animals.get(3), "cat", "Fancy that to swallow a");
+        assertAnimal(animals.get(4), "dog", "What a hog, to swallow a");
+        assertAnimal(animals.get(5), "cow", "I don't know how she swallowed a");
+        assertAnimal(animals.get(6), "horse", "");
+    }
+
+    private void assertAnimal(Animal animal, String name, String rhyme) {
+        assertEquals(name, animal.getName());
+        assertEquals(rhyme, animal.getRhyme());
     }
 }
