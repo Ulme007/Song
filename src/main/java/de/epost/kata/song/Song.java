@@ -99,13 +99,14 @@ class Song {
     private String addSecondStrophe(List<Animal> animals) {
         String strophe = "\n" +
                 "There was an old lady who swallowed a ${animal1};\n" +
-                "That wriggled and wiggled and tickled inside her.\n" +
+                "${animalRhyme1}\n" +
                 "She swallowed the ${animal1} to catch the ${animal0};\n" +
                 "I don't know why she swallowed a ${animal0} - perhaps she'll die!\n";
 
         Map<String, String> values = new HashMap<>();
         values.put("animal0", animals.get(0).getName());
         values.put("animal1", animals.get(1).getName());
+        values.put("animalRhyme1", animals.get(1).getRhyme());
 
         StrSubstitutor sub = new StrSubstitutor(values);
         return sub.replace(strophe);
@@ -114,7 +115,7 @@ class Song {
     private String addThirdStrophe(List<Animal> animals) {
         String strophe = "\n" +
                 "There was an old lady who swallowed a ${animal2};\n" +
-                "How absurd to swallow a ${animal2}.\n" +
+                "${animalRhyme2} ${animal2}.\n" +
                 "She swallowed the ${animal2} to catch the ${animal1},\n" +
                 "She swallowed the ${animal1} to catch the ${animal0};\n" +
                 "I don't know why she swallowed a ${animal0} - perhaps she'll die!\n";
@@ -123,6 +124,7 @@ class Song {
         values.put("animal0", animals.get(0).getName());
         values.put("animal1", animals.get(1).getName());
         values.put("animal2", animals.get(2).getName());
+        values.put("animalRhyme2", animals.get(2).getRhyme());
 
         StrSubstitutor sub = new StrSubstitutor(values);
         return sub.replace(strophe);
@@ -131,7 +133,7 @@ class Song {
     private String addFourthStrophe(List<Animal> animals) {
         String strophe = "\n" +
                 "There was an old lady who swallowed a ${animal3};\n" +
-                "Fancy that to swallow a ${animal3}!\n" +
+                "${animalRhyme3} ${animal3}!\n" +
                 "She swallowed the ${animal3} to catch the ${animal2},\n" +
                 "She swallowed the ${animal2} to catch the ${animal1},\n" +
                 "She swallowed the ${animal1} to catch the ${animal0};\n" +
@@ -142,6 +144,7 @@ class Song {
         values.put("animal1", animals.get(1).getName());
         values.put("animal2", animals.get(2).getName());
         values.put("animal3", animals.get(3).getName());
+        values.put("animalRhyme3", animals.get(3).getRhyme());
 
         StrSubstitutor sub = new StrSubstitutor(values);
         return sub.replace(strophe);
@@ -150,7 +153,7 @@ class Song {
     private String addFifthStrophe(List<Animal> animals) {
         String strophe = "\n" +
                 "There was an old lady who swallowed a ${animal4};\n" +
-                "What a hog, to swallow a ${animal4}!\n" +
+                "${animalRhyme4} ${animal4}!\n" +
                 "She swallowed the ${animal4} to catch the ${animal3},\n" +
                 "She swallowed the ${animal3} to catch the ${animal2},\n" +
                 "She swallowed the ${animal2} to catch the ${animal1},\n" +
@@ -163,6 +166,7 @@ class Song {
         values.put("animal2", animals.get(2).getName());
         values.put("animal3", animals.get(3).getName());
         values.put("animal4", animals.get(4).getName());
+        values.put("animalRhyme4", animals.get(4).getRhyme());
 
         StrSubstitutor sub = new StrSubstitutor(values);
         return sub.replace(strophe);
@@ -171,7 +175,7 @@ class Song {
     private String addSixthStrophe(List<Animal> animals) {
         String strophe = "\n" +
                 "There was an old lady who swallowed a ${animal5};\n" +
-                "I don't know how she swallowed a ${animal5}!\n" +
+                "${animalRhyme5} ${animal5}!\n" +
                 "She swallowed the ${animal5} to catch the ${animal4},\n" +
                 "She swallowed the ${animal4} to catch the ${animal3},\n" +
                 "She swallowed the ${animal3} to catch the ${animal2},\n" +
@@ -186,6 +190,7 @@ class Song {
         values.put("animal3", animals.get(3).getName());
         values.put("animal4", animals.get(4).getName());
         values.put("animal5", animals.get(5).getName());
+        values.put("animalRhyme5", animals.get(5).getRhyme());
 
         StrSubstitutor sub = new StrSubstitutor(values);
         return sub.replace(strophe);
