@@ -48,7 +48,8 @@ public class SongTest {
             "There was an old lady who swallowed a horse...\n" +
             "...She's dead, of course!";
 
-    private static final String FIND_NEMO_SONG = "There was an old lady who swallowed a Nemo.\n" +
+    private static final String FIND_NEMO_SONG =
+            "There was an old lady who swallowed a Nemo.\n" +
             "I don't know why she swallowed a Nemo - perhaps she'll die!\n" +
             "\n" +
             "There was an old lady who swallowed a Dorie;\n" +
