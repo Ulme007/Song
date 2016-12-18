@@ -44,6 +44,9 @@ class Song {
     }
 
     private String playSong(List<Animal> animals) {
+        if (animals.isEmpty()) {
+            return "";
+        }
         String song = addFirstStrophe(animals.get(0));
         song += addInnerStrophes(animals);
         song += addLastStrophe(animals.get(animals.size() - 1));

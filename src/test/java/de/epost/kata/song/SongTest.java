@@ -105,6 +105,12 @@ public class SongTest {
             "\n" +
             "There was an old lady who swallowed a Cock...\n" +
             "...She's dead, of course!";
+    private static final String ONE_ANIMAL_THEME_SONG =
+            "There was an old lady who swallowed a fly.\n" +
+            "I don't know why she swallowed a fly - perhaps she'll die!\n" +
+            "\n" +
+            "There was an old lady who swallowed a fly...\n" +
+            "...She's dead, of course!";
 
     @Test
     public void testDefaultSong() throws Exception {
@@ -133,5 +139,19 @@ public class SongTest {
         Song song = new Song(new BremerTownMusiciansTheme());
 
         assertEquals(BREMER_TOWN_MUSICIANS_SONG, song.playSong());
+    }
+
+    @Test
+    public void oneAnimalTheme() throws Exception {
+        Song song = new Song(new OneAnimalTheme());
+
+        assertEquals(ONE_ANIMAL_THEME_SONG, song.playSong());
+    }
+
+    @Test
+    public void emptyTheme() throws Exception {
+        Song song = new Song(new EmptyTheme());
+
+        assertEquals("", song.playSong());
     }
 }
