@@ -9,64 +9,42 @@ import java.util.Map;
 
 class Song {
 
-    private static final String firstStropheTemplate =
-            "There was an old lady who swallowed a ${animal}.\n" +
-                    "I don't know why she swallowed a ${animal} - perhaps she'll die!\n";
+    private static final String FIRST_STROPHE =
+            "There was an old lady who swallowed a ${animal}.\n";
 
-    private static final String lastStropheTemplate =
+    private static final String SECOND_STROPHE = "\n" +
+            "There was an old lady who swallowed a ${animal1};\n" +
+            "${animalRhyme1}\n" +
+            "She swallowed the ${animal1} to catch the ${animal};\n";
+
+    private static final String INNER_STROPHE_START = "\n" +
+            "There was an old lady who swallowed a ${animal};\n" +
+            "${animalRhyme}\n";
+
+    private static final String INNER_STROPHE_MIDDLE_WITH_COMMA =
+            "She swallowed the ${animal} to catch the ${animal1},\n";
+
+    private static final String INNER_STROPHE_MIDDLE_WITH_SEMICOLON =
+            "She swallowed the ${animal} to catch the ${animal1};\n";
+
+    private static final String LAST_STROPHE =
             "There was an old lady who swallowed a ${animal}...\n" +
                     "...She's dead, of course!";
 
-
-//    private String songTemplate =
-//            "\n" +
-//                    "There was an old lady who swallowed a @1@;\n" +
-//                    "That wriggled and wiggled and tickled inside her.\n" +
-//                    "She swallowed the @1@ to catch the @0@;\n" +
-//                    "I don't know why she swallowed a @0@ - perhaps she'll die!\n" +
-//                    "\n" +
-//                    "There was an old lady who swallowed a @2@;\n" +
-//                    "How absurd to swallow a @2@.\n" +
-//                    "She swallowed the @2@ to catch the @1@,\n" +
-//                    "She swallowed the @1@ to catch the @0@;\n" +
-//                    "I don't know why she swallowed a @0@ - perhaps she'll die!\n" +
-//            "\n" +
-//                    "There was an old lady who swallowed a @3@;\n" +
-//                    "Fancy that to swallow a @3@!\n" +
-//                    "She swallowed the @3@ to catch the @2@,\n" +
-//                    "She swallowed the @2@ to catch the @1@,\n" +
-//                    "She swallowed the @1@ to catch the @0@;\n" +
-//                    "I don't know why she swallowed a @0@ - perhaps she'll die!\n" +
-//                    "\n" +
-//                    "There was an old lady who swallowed a @4@;\n" +
-//                    "What a hog, to swallow a @4@!\n" +
-//                    "She swallowed the @4@ to catch the @3@,\n" +
-//                    "She swallowed the @3@ to catch the @2@,\n" +
-//                    "She swallowed the @2@ to catch the @1@,\n" +
-//                    "She swallowed the @1@ to catch the @0@;\n" +
-//                    "I don't know why she swallowed a @0@ - perhaps she'll die!\n" +
-//            "\n" +
-//                    "There was an old lady who swallowed a @5@;\n" +
-//                    "I don't know how she swallowed a @5@!\n" +
-//                    "She swallowed the @5@ to catch the @4@,\n" +
-//                    "She swallowed the @4@ to catch the @3@,\n" +
-//                    "She swallowed the @3@ to catch the @2@,\n" +
-//                    "She swallowed the @2@ to catch the @1@,\n" +
-//                    "She swallowed the @1@ to catch the @0@;\n" +
-//                    "I don't know why she swallowed a @0@ - perhaps she'll die!\n" +
-//                    "\n";
+    private static final String STROPHE_END =
+            "I don't know why she swallowed a ${animal} - perhaps she'll die!\n";
 
     private Theme theme;
 
-    public Song() {
+    Song() {
         this.theme = new FarmTheme();
     }
 
-    public Song(Theme theme) {
+    Song(Theme theme) {
         this.theme = theme;
     }
 
-    public String playSong() {
+    String playSong() {
         return playSong(theme.getAnimals());
     }
 
@@ -82,118 +60,77 @@ class Song {
         values.put("animal", animal.getName());
 
         StrSubstitutor sub = new StrSubstitutor(values);
-        return sub.replace(firstStropheTemplate);
+        return sub.replace(FIRST_STROPHE) + sub.replace(STROPHE_END);
     }
 
     private String addMiddleStrophes(List<Animal> animals) {
         String middleSong = addSecondStrophe(animals);
-        middleSong += addThirdStrophe(animals);
-        middleSong += addFourthStrophe(animals);
-        middleSong += addFifthStrophe(animals);
-        middleSong += addSixthStrophe(animals);
+
+        for (int i = 3; i < animals.size(); i++) {
+            middleSong += addThirdStrophe(animals, i);
+        }
+
         middleSong += "\n";
 
         return middleSong;
     }
 
     private String addSecondStrophe(List<Animal> animals) {
-        String strophe = "\n" +
-                "There was an old lady who swallowed a ${animal1};\n" +
-                "${animalRhyme1}\n" +
-                "She swallowed the ${animal1} to catch the ${animal0};\n" +
-                "I don't know why she swallowed a ${animal0} - perhaps she'll die!\n";
-
         Map<String, String> values = new HashMap<>();
-        values.put("animal0", animals.get(0).getName());
+        values.put("animal", animals.get(0).getName());
         values.put("animal1", animals.get(1).getName());
         values.put("animalRhyme1", animals.get(1).getRhyme());
 
         StrSubstitutor sub = new StrSubstitutor(values);
-        return sub.replace(strophe);
+        return sub.replace(SECOND_STROPHE) + sub.replace(STROPHE_END);
     }
 
-    private String addThirdStrophe(List<Animal> animals) {
-        String strophe = "\n" +
-                "There was an old lady who swallowed a ${animal2};\n" +
-                "${animalRhyme2} ${animal2}.\n" +
-                "She swallowed the ${animal2} to catch the ${animal1},\n" +
-                "She swallowed the ${animal1} to catch the ${animal0};\n" +
-                "I don't know why she swallowed a ${animal0} - perhaps she'll die!\n";
+    private String addThirdStrophe(List<Animal> animals, int number) {
+        String start = addInnerStropheStart(animals.get(number - 1));
+        String middle = addInnerStropheMiddle(animals, number);
+        String end = addInnerStropheEnd(animals.get(0));
 
-        Map<String, String> values = new HashMap<>();
-        values.put("animal0", animals.get(0).getName());
-        values.put("animal1", animals.get(1).getName());
-        values.put("animal2", animals.get(2).getName());
-        values.put("animalRhyme2", animals.get(2).getRhyme());
-
-        StrSubstitutor sub = new StrSubstitutor(values);
-        return sub.replace(strophe);
+        return start + middle + end;
     }
 
-    private String addFourthStrophe(List<Animal> animals) {
-        String strophe = "\n" +
-                "There was an old lady who swallowed a ${animal3};\n" +
-                "${animalRhyme3} ${animal3}!\n" +
-                "She swallowed the ${animal3} to catch the ${animal2},\n" +
-                "She swallowed the ${animal2} to catch the ${animal1},\n" +
-                "She swallowed the ${animal1} to catch the ${animal0};\n" +
-                "I don't know why she swallowed a ${animal0} - perhaps she'll die!\n";
-
+    private String addInnerStropheStart(Animal animal) {
         Map<String, String> values = new HashMap<>();
-        values.put("animal0", animals.get(0).getName());
-        values.put("animal1", animals.get(1).getName());
-        values.put("animal2", animals.get(2).getName());
-        values.put("animal3", animals.get(3).getName());
-        values.put("animalRhyme3", animals.get(3).getRhyme());
+        values.put("animal", animal.getName());
+        values.put("animalRhyme", animal.getRhyme());
 
         StrSubstitutor sub = new StrSubstitutor(values);
-        return sub.replace(strophe);
+        return sub.replace(INNER_STROPHE_START);
     }
 
-    private String addFifthStrophe(List<Animal> animals) {
-        String strophe = "\n" +
-                "There was an old lady who swallowed a ${animal4};\n" +
-                "${animalRhyme4} ${animal4}!\n" +
-                "She swallowed the ${animal4} to catch the ${animal3},\n" +
-                "She swallowed the ${animal3} to catch the ${animal2},\n" +
-                "She swallowed the ${animal2} to catch the ${animal1},\n" +
-                "She swallowed the ${animal1} to catch the ${animal0};\n" +
-                "I don't know why she swallowed a ${animal0} - perhaps she'll die!\n";
+    private String addInnerStropheMiddle(List<Animal> animals, int number) {
+        String result = "";
+        for (int i = number - 1; i > 1; i--) {
+            Map<String, String> values = new HashMap<>();
+            values.put("animal", animals.get(i).getName());
+            values.put("animal1", animals.get(i - 1).getName());
 
-        Map<String, String> values = new HashMap<>();
-        values.put("animal0", animals.get(0).getName());
-        values.put("animal1", animals.get(1).getName());
-        values.put("animal2", animals.get(2).getName());
-        values.put("animal3", animals.get(3).getName());
-        values.put("animal4", animals.get(4).getName());
-        values.put("animalRhyme4", animals.get(4).getRhyme());
+            StrSubstitutor sub = new StrSubstitutor(values);
+            result += sub.replace(INNER_STROPHE_MIDDLE_WITH_COMMA);
+        }
 
-        StrSubstitutor sub = new StrSubstitutor(values);
-        return sub.replace(strophe);
+        if (number > 1) {
+            Map<String, String> values = new HashMap<>();
+            values.put("animal", animals.get(1).getName());
+            values.put("animal1", animals.get(0).getName());
+
+            StrSubstitutor sub = new StrSubstitutor(values);
+            result += sub.replace(INNER_STROPHE_MIDDLE_WITH_SEMICOLON);
+        }
+
+        return result;
     }
 
-    private String addSixthStrophe(List<Animal> animals) {
-        String strophe = "\n" +
-                "There was an old lady who swallowed a ${animal5};\n" +
-                "${animalRhyme5} ${animal5}!\n" +
-                "She swallowed the ${animal5} to catch the ${animal4},\n" +
-                "She swallowed the ${animal4} to catch the ${animal3},\n" +
-                "She swallowed the ${animal3} to catch the ${animal2},\n" +
-                "She swallowed the ${animal2} to catch the ${animal1},\n" +
-                "She swallowed the ${animal1} to catch the ${animal0};\n" +
-                "I don't know why she swallowed a ${animal0} - perhaps she'll die!\n";
-
+    private String addInnerStropheEnd(Animal animal) {
         Map<String, String> values = new HashMap<>();
-        values.put("animal0", animals.get(0).getName());
-        values.put("animal1", animals.get(1).getName());
-        values.put("animal2", animals.get(2).getName());
-        values.put("animal3", animals.get(3).getName());
-        values.put("animal4", animals.get(4).getName());
-        values.put("animal5", animals.get(5).getName());
-        values.put("animalRhyme5", animals.get(5).getRhyme());
+        values.put("animal", animal.getName());
 
         StrSubstitutor sub = new StrSubstitutor(values);
-        return sub.replace(strophe);
+        return sub.replace(STROPHE_END);
     }
 
     private String addLastStrophe(Animal animal) {
@@ -201,7 +138,7 @@ class Song {
         values.put("animal", animal.getName());
 
         StrSubstitutor sub = new StrSubstitutor(values);
-        return sub.replace(lastStropheTemplate);
+        return sub.replace(LAST_STROPHE);
     }
 
     public static void main(String[] args) {

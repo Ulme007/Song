@@ -16,10 +16,10 @@ public class ThemeTest {
 
         assertAnimal(animals.get(0), "fly", "");
         assertAnimal(animals.get(1), "spider", "That wriggled and wiggled and tickled inside her.");
-        assertAnimal(animals.get(2), "bird", "How absurd to swallow a");
-        assertAnimal(animals.get(3), "cat", "Fancy that to swallow a");
-        assertAnimal(animals.get(4), "dog", "What a hog, to swallow a");
-        assertAnimal(animals.get(5), "cow", "I don't know how she swallowed a");
+        assertAnimal(animals.get(2), "bird", "How absurd to swallow a bird.");
+        assertAnimal(animals.get(3), "cat", "Fancy that to swallow a cat!");
+        assertAnimal(animals.get(4), "dog", "What a hog, to swallow a dog!");
+        assertAnimal(animals.get(5), "cow", "I don't know how she swallowed a cow!");
         assertAnimal(animals.get(6), "horse", "");
     }
 

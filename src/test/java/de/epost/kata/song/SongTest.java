@@ -128,7 +128,7 @@ public class SongTest {
         assertEquals(FIND_NEMO_SONG, song.playSong());
     }
 
-    //@Test
+    @Test
     public void playBremerTownMusicians() throws Exception {
         Song song = new Song(new BremerTownMusiciansTheme());
 
